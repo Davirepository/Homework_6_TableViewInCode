@@ -52,11 +52,13 @@ final class TableViewCell: UITableViewCell {
         
         titleText.topAnchor.constraint(equalTo: topAnchor, constant: 18).isActive = true
         titleText.leadingAnchor.constraint(equalTo: mainImage.trailingAnchor, constant: 15).isActive = true
-        titleText.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10)
+        titleText.widthAnchor.constraint(equalToConstant: frame.width - 10).isActive = true
+        titleText.bottomAnchor.constraint(equalTo: subtitle.topAnchor, constant: 0).isActive = true
         
         subtitle.topAnchor.constraint(equalTo: titleText.bottomAnchor, constant: 5).isActive = true
         subtitle.leadingAnchor.constraint(equalTo: mainImage.trailingAnchor, constant: 15).isActive = true
-        subtitle.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10)
+        subtitle.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10).isActive = true
+        subtitle.widthAnchor.constraint(equalToConstant: frame.width - 10).isActive = true
         
     }
     
@@ -66,8 +68,6 @@ final class TableViewCell: UITableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-//        self.accessoryType = .none
         mainImage.image = nil
     }
-    
 }

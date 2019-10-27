@@ -9,5 +9,14 @@
 import Foundation
 
 protocol NavigationDelegate {
-    func getNavController(title: String, controller: DetailVC)
+    func getNavController(title: String, indexPath: IndexPath, controller: DetailVC)
 }
+
+protocol ChangeValue {
+    func changeValue(newValue: String, indexPath: IndexPath)
+}
+
+//protocol AnchorsImageTitle {
+//    func anchorImage()
+//    func anchorTitle()
+//}

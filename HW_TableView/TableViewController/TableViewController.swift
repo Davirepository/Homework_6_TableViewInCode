@@ -21,7 +21,11 @@ class TableViewController: UIViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
 
         tableView.register(TableViewCell.self, forCellReuseIdentifier: TableViewCell.reusedId)
+        tableView.register(TableViewCellUsuall.self, forCellReuseIdentifier: TableViewCellUsuall.reusedId)
         updateLayout(with: view.frame.size)
+        
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 600
     }
     
     private func updateLayout(with size: CGSize) {
@@ -33,13 +37,18 @@ class TableViewController: UIViewController {
         view.addSubview(tableView)
         tableView.dataSource = dataSource
         tableView.delegate = dataSource
+        
+        // sending data to detailVC
         dataSource.delegate = self
+        tableView.reloadData()
     }
 }
 
+// sending data to detailVC
 extension TableViewController: NavigationDelegate {
-    func getNavController(title: String, controller: DetailVC) {
+    func getNavController(title: String, indexPath: IndexPath, controller: DetailVC) {
         controller.data = title
+        controller.indexPath = indexPath
         self.navigationController?.pushViewController(controller, animated: false)
     }
 }

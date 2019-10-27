@@ -10,18 +10,37 @@ import UIKit
 
 class DetailVC: UIViewController {
     
+    var data: String?
+    var indexPath: IndexPath?
+    var delegate: ChangeValue?
+    
     let textField: UITextField = {
         let text = UITextField()
-        text.frame = CGRect(x: 30, y: 300, width: 80, height: 50)
+        text.font = UIFont.boldSystemFont(ofSize: 16)
+        text.frame = CGRect(x: 50, y: 150, width: 250, height: 50)
+        text.addTarget(self, action: #selector(getNewValue), for: .editingChanged)
         return text
     }()
     
-    var data: String?
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = .yellow
+        textField.backgroundColor = .white
         view.addSubview(textField)
-        textField.placeholder = data
+        
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        textField.text = data
+    }
+    
+    @objc func getNewValue() {
+        if let newValue = textField.text {
+            delegate?.changeValue(newValue: newValue, indexPath: indexPath!)
+        } else {
+            delegate?.changeValue(newValue: "", indexPath: indexPath!)
+        }
+    }
+    
 }
